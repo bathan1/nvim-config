@@ -64,6 +64,7 @@ local plugins = {
     event = 'InsertEnter',
     opts = {},
   },
+  'Vimjas/vim-python-pep8-indent'
 
 }
 
