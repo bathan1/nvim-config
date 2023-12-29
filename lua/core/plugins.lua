@@ -23,6 +23,7 @@ local plugins = {
     priority = 1000
   },
   'tiagovla/tokyodark.nvim',
+  'rebelot/kanagawa.nvim',
   'nvim-tree/nvim-web-devicons',
   {
     'stevearc/oil.nvim',
