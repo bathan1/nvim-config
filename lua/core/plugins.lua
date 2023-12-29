@@ -32,12 +32,6 @@ local plugins = {
   'nvim-lualine/lualine.nvim',
   'lewis6991/gitsigns.nvim',
   'lukas-reineke/indent-blankline.nvim',
-  {
-    'numToStr/Comment.nvim',
-    opts = {
-    },
-    lazy = true,
-  },
   -- Syntax highlighting and Language Support
   'nvim-treesitter/nvim-treesitter',
   {
@@ -51,6 +45,12 @@ local plugins = {
     'neovim/nvim-lspconfig',
   },
   { 'folke/neodev.nvim', opts = {} },
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+    },
+    lazy = false,
+  },
 
   -- Text stuff
   'hrsh7th/nvim-cmp',
