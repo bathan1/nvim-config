@@ -1,5 +1,5 @@
 -- Change the theme to whatever theme u want, just have it installed first (duh)
-THEME = 'kanagawa'
+THEME = 'tokyodark'
 
 -- Enable devicons first
 require('core.plugin-config.ui.web-devicons')
