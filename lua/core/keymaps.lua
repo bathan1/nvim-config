@@ -15,6 +15,7 @@ vim.opt.autoindent = false
 
 -- set line numbers to relative 
 vim.opt.number = true
+vim.opt.relativenumber = true;
 
 -- leader binding for clearing current search
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
