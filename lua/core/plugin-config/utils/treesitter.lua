@@ -1,13 +1,11 @@
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { 'c', 'lua', 'vim', 'javascript', 'typescript', 'html', 'css' },
-
-  sync_install = false,
   auto_install = true,
-  ignore_install = { },
+  ensure_installed = { 'c', 'lua', 'vim', 'javascript', 'typescript', 'html', 'css', 'tsx', 'json' },
   highlight = {
     enable = true,
+    use_languagetree = true,
   },
   autotag = {
-    enable = true
+    enable = true,
   },
 }
