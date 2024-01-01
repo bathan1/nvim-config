@@ -67,8 +67,12 @@ local plugins = {
   },
   {
     'windwp/nvim-ts-autotag',
-    event = 'InsertEnter',
-    opts = {},
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end,
+    lazy = true,
+    event = 'VeryLazy',
   },
   'Vimjas/vim-python-pep8-indent'
 
