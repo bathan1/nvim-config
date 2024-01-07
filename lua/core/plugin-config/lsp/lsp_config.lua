@@ -69,3 +69,8 @@ require("lspconfig").tailwindcss.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
+
+require("lspconfig").emmet_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
