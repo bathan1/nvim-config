@@ -18,6 +18,7 @@ local plugins = {
         'christoomey/vim-tmux-navigator',
         lazy = false,
     },
+    { 'rose-pine/neovim', name = 'rose-pine' },
     { "catppuccin/nvim",
         name = "catppuccin",
         priority = 1000

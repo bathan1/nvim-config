@@ -1,5 +1,5 @@
 -- Change the theme to whatever theme u want, just have it installed first (duh)
-THEME = 'catppuccin'
+THEME = 'rose-pine'
 
 -- Enable devicons first
 require('core.plugin-config.ui.web-devicons')
