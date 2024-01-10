@@ -7,8 +7,8 @@ vim.opt.laststatus = 2
 vim.opt.cursorline = true
 
 -- use spaces for tabs
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.shiftround = true
 vim.opt.expandtab = true
 vim.opt.autoindent = false
