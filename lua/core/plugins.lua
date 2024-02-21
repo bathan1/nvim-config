@@ -29,17 +29,6 @@ local plugins = {
     'nvim-tree/nvim-web-devicons',
     "onsails/lspkind.nvim",
     {
-        'jesseleite/nvim-noirbuddy',
-        dependencies = {
-            { 'tjdevries/colorbuddy.nvim', branch = 'dev' }
-        },
-        lazy = false,
-        priority = 1000,
-        opts = {
-            preset = "miami-nights"
-        },
-    },
-    {
         'stevearc/oil.nvim',
         opts = {},
         dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -47,6 +36,7 @@ local plugins = {
     'nvim-lualine/lualine.nvim',
     'lewis6991/gitsigns.nvim',
     'lukas-reineke/indent-blankline.nvim',
+
     -- Syntax highlighting and Language Support
     'nvim-treesitter/nvim-treesitter',
     {
@@ -65,6 +55,13 @@ local plugins = {
         opts = {
         },
         lazy = false,
+    },
+    {
+        'nvimdev/lspsaga.nvim',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-tree/nvim-web-devicons'
+        }
     },
 
     -- Text stuff
