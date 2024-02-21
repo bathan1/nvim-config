@@ -27,6 +27,7 @@ local plugins = {
     'rebelot/kanagawa.nvim',
     "cranberry-clockworks/coal.nvim",
     'nvim-tree/nvim-web-devicons',
+    "onsails/lspkind.nvim",
     {
         'jesseleite/nvim-noirbuddy',
         dependencies = {
