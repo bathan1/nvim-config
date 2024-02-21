@@ -6,7 +6,6 @@ require('nvim-web-devicons').setup({
       icon = "󰈚",
       name = "Default",
     },
-
     c = {
       icon = "",
       color = '#ffffff',
@@ -192,6 +191,11 @@ require('nvim-web-devicons').setup({
       name = 'package.json',
     },
     ['.eslintrc.cjs'] = {
+      icon = '󰱺',
+      color = '#443b59',
+      name = 'eslint'
+    },
+    ['.eslintrc.js'] = {
       icon = '󰱺',
       color = '#443b59',
       name = 'eslint'
