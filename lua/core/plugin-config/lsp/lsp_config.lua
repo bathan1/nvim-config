@@ -8,10 +8,7 @@ local on_attach = function(_, _)
   vim.diagnostic.config({
     virtual_text = false;
   });
-
-  vim[":x"].set('n', '<leader>ca', vim.lsp.buf.code_action, {})
-  vim[":x"].set('n', 'gi', vim.lsp.buf.implementation, {})
-  vim[":x"].set('n', 'gr', require('telescope.builtin').lsp_references, {})
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
