@@ -3,8 +3,8 @@ require("lualine").setup({
         lualine_x = {
             {
                 "buffers",
-                mode = 4,
-                max_length = vim.o.columns * 1 / 6
+                mode = 3,
+                max_length = vim.o.columns * 1 / 4
             },
             "filetype"
         }
