@@ -20,13 +20,13 @@ vim.opt.number = true
 vim.opt.relativenumber = true;
 
 -- leader binding for clearing current search
-vim[":x"].set('n', '<leader>h', ':nohlsearch<CR>')
+vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 
 -- Bind back Ctrl-V to visual block mode
-vim[":x"].set('n', '<C-v>', '<C-q>')
+vim.keymap.set('n', '<C-v>', '<C-q>')
 
 -- bindings for tmux navigation
-vim[":x"].set('n', '<C-h>', '<cmd> TmuxNavigateLeft<CR>')
-vim[":x"].set('n', '<C-j>', '<cmd> TmuxNavigateDown<CR>')
-vim[":x"].set('n', '<C-k>', '<cmd> TmuxNavigateUp<CR>')
-vim[":x"].set('n', '<C-l>', '<cmd> TmuxNavigateRight<CR>')
+vim.keymap.set('n', '<C-h>', '<cmd> TmuxNavigateLeft<CR>')
+vim.keymap.set('n', '<C-j>', '<cmd> TmuxNavigateDown<CR>')
+vim.keymap.set('n', '<C-k>', '<cmd> TmuxNavigateUp<CR>')
+vim.keymap.set('n', '<C-l>', '<cmd> TmuxNavigateRight<CR>')
