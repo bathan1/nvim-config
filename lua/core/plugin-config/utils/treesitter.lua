@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup({
   auto_install = true,
   ensure_installed = { 'c', 'lua', 'vim', 'javascript', 'typescript', 'html', 'css', 'tsx', 'json' },
   highlight = {
@@ -8,4 +8,4 @@ require'nvim-treesitter.configs'.setup {
   autotag = {
     enable = true,
   },
-}
+})

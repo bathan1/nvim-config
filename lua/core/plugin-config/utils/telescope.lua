@@ -1,6 +1,5 @@
 -- telescope keybindings
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<CR>')
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 vim.keymap.set("n", "<leader>fm", "<cmd>Telescope marks<cr>")

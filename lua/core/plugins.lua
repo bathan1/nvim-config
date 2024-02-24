@@ -31,8 +31,9 @@ local plugins = {
     {
         'stevearc/oil.nvim',
         opts = {},
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = "nvim-tree/nvim-web-devicons"
     },
+    { 'folke/neodev.nvim', opts = {} },
     'nvim-lualine/lualine.nvim',
     'lewis6991/gitsigns.nvim',
     'lukas-reineke/indent-blankline.nvim',
@@ -49,7 +50,6 @@ local plugins = {
         'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig',
     },
-    { 'folke/neodev.nvim', opts = {} },
     {
         'numToStr/Comment.nvim',
         opts = {
