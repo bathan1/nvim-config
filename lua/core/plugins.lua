@@ -37,6 +37,7 @@ local plugins = {
     'nvim-lualine/lualine.nvim',
     'lewis6991/gitsigns.nvim',
     'lukas-reineke/indent-blankline.nvim',
+    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons'},
 
     -- Syntax highlighting and Language Support
     'nvim-treesitter/nvim-treesitter',

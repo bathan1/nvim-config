@@ -12,6 +12,7 @@ vim.opt.shiftwidth = 4
 vim.opt.shiftround = true
 vim.opt.expandtab = true
 vim.opt.autoindent = true
+vim.opt.showtabline = 1
 
 vim.opt.signcolumn = "yes"
 
