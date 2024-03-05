@@ -23,7 +23,11 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next);
 vim.keymap.set("n", "gh", vim.diagnostic.open_float, {});
 
 local on_attach = function(client, bufnr)
-    navic.attach(client, bufnr);
+    -- Attach breadcrumbs plugin to the on_attach fn
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr);
+    end
+
     vim.diagnostic.config({
         virtual_text = false; -- Turn off virtual text since it is ugly af
     });
