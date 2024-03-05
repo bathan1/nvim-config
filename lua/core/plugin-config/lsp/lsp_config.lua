@@ -1,14 +1,42 @@
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = { 'lua_ls', 'tsserver', 'eslint', 'html', 'cssls', 'clangd', 'pyright', 'jdtls', 'lemminx' }
-})
+  ensure_installed = {
+      'lua_ls',
+      'tsserver',
+      'eslint',
+      'html',
+      'cssls',
+      'clangd',
+      'pyright',
+      'jdtls',
+      'lemminx',
+      'tailwindcss',
+      'prismals',
+      'sqlls'
+  }
+});
+local navic = require("nvim-navic");
 
-local on_attach = function(_, _)
+-- Global mappings
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev);
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next);
+vim.keymap.set("n", "gh", vim.diagnostic.open_float, {});
 
-  vim.diagnostic.config({
-    virtual_text = false;
-  });
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
+local on_attach = function(client, bufnr)
+    navic.attach(client, bufnr);
+    vim.diagnostic.config({
+        virtual_text = false; -- Turn off virtual text since it is ugly af
+    });
+
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {});
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {});
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {});
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, {})
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, {})
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, {})
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, {})
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -76,4 +104,9 @@ require("lspconfig").sqlls.setup {
 require("lspconfig").prismals.setup {
   on_attach = on_attach,
   capabilities = capabilities
+}
+
+require("lspconfig").yamlls.setup {
+    on_attach = on_attach,
+    capabilites = capabilities
 }

@@ -57,13 +57,7 @@ local plugins = {
         },
         lazy = false,
     },
-    {
-        'nvimdev/lspsaga.nvim',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-            'nvim-tree/nvim-web-devicons'
-        }
-    },
+    "SmiteshP/nvim-navic",
 
     -- Text stuff
     'hrsh7th/nvim-cmp',
