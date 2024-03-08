@@ -15,6 +15,9 @@ require("lualine").setup({
         },
     },
     winbar = {
+        lualine_a = {
+            "filename"
+        },
         lualine_c = {
             {
                 function()
