@@ -15,10 +15,8 @@ require("lualine").setup({
         },
     },
     winbar = {
-        lualine_a = {
-            "filename"
-        },
         lualine_c = {
+            "filename",
             {
                 function()
                     return navic.get_location()
