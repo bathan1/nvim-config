@@ -36,7 +36,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {});
     vim.keymap.set("n", "K", vim.lsp.buf.hover, {});
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, {})
+    vim.keymap.set('n', 'gH', vim.lsp.buf.signature_help, {})
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, {})
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, {})
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, {})
