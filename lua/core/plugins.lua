@@ -76,7 +76,12 @@ local plugins = {
         lazy = true,
         event = 'VeryLazy',
     },
-    'Vimjas/vim-python-pep8-indent'
+    'Vimjas/vim-python-pep8-indent',
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^4',
+        ft = { 'rust' },
+    }
 }
 
 local opts = {}

@@ -12,7 +12,7 @@ require('mason-lspconfig').setup({
       'lemminx',
       'tailwindcss',
       'prismals',
-      'sqlls'
+      'sqlls',
   }
 });
 local navic = require("nvim-navic");
@@ -44,18 +44,19 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require("lspconfig");
 
-require('lspconfig').lua_ls.setup {
+lspconfig.lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-require('lspconfig').tsserver.setup {
+lspconfig.tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-require('lspconfig').html.setup {
+lspconfig.html.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
@@ -90,27 +91,39 @@ require('lspconfig').lemminx.setup {
   capabilities = capabilities
 }
 
-require("lspconfig").tailwindcss.setup {
+lspconfig.tailwindcss.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
 
-require("lspconfig").emmet_ls.setup {
+lspconfig.emmet_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
 
-require("lspconfig").sqlls.setup {
+lspconfig.sqlls.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
 
-require("lspconfig").prismals.setup {
+lspconfig.prismals.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
 
-require("lspconfig").yamlls.setup {
+lspconfig.yamlls.setup {
     on_attach = on_attach,
     capabilites = capabilities
+}
+
+vim.g.rustaceanvim = {
+    tools = {
+        
+    },
+    server = {
+        on_attach = on_attach,
+        default_settings = {
+            ["rust-analyzer"] = {}
+        }
+    },
 }
