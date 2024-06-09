@@ -36,7 +36,21 @@ local plugins = {
     { 'folke/neodev.nvim', opts = {} },
     'nvim-lualine/lualine.nvim',
     'lewis6991/gitsigns.nvim',
-    'lukas-reineke/indent-blankline.nvim',
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        init = function () 
+            vim.api.nvim_create_autocmd({ 'ColorScheme', 'FileType' }, {
+                callback = function ()
+                    vim.cmd([[
+                        hi IndentBlanklineChar gui=nocombine guifg=#444C55
+                        hi IndentBlanklineSpaceChar gui=nocombine guifg=#444C55
+                        hi IndentBlanklineContextChar gui=nocombine guifg=#FB5E2A
+                        hi IndentBlanklineContextStart gui=underline guisp=#FB5E2A
+                    ]])
+                end,
+            })
+        end
+    },
 
     -- Syntax highlighting and Language Support
     'nvim-treesitter/nvim-treesitter',
@@ -81,6 +95,16 @@ local plugins = {
         'mrcjkb/rustaceanvim',
         version = '^4',
         ft = { 'rust' },
+    },
+    {
+        "b0o/lavi.nvim",
+        dependencies = { 'rktjmp/lush.nvim' }
+    },
+    {
+        "nyngwang/nvimgelion",
+        init = function()
+            vim.cmd([[color nvimgelion]])
+        end
     }
 }
 
