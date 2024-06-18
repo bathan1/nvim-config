@@ -53,7 +53,7 @@ lspconfig.tsserver.setup({
     capabilities = capabilities
 })
 
-lspconfig.biome.setup({
+lspconfig.html.setup({
     on_attach = on_attach,
     capabilities = capabilities
 })
