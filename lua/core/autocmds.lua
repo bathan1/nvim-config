@@ -13,4 +13,3 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt_local.shiftwidth = 2
     end
 })
-

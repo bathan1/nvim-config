@@ -2,14 +2,12 @@ require('mason').setup()
 require('mason-lspconfig').setup({
   ensure_installed = {
       'lua_ls',
-      'tsserver',
       'eslint',
       'html',
       'cssls',
       'clangd',
       'pyright',
       'jdtls',
-      'lemminx',
       'tailwindcss',
       'prismals',
       'sqlls',
@@ -17,9 +15,11 @@ require('mason-lspconfig').setup({
 });
 local navic = require("nvim-navic");
 
+local toggle_inlay = function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ nil }))
+end
+
 -- Global mappings
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev);
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next);
 vim.keymap.set("n", "gh", vim.diagnostic.open_float, {});
 
 local on_attach = function(client, bufnr)
@@ -32,71 +32,67 @@ local on_attach = function(client, bufnr)
         virtual_text = false; -- Turn off virtual text since it is ugly af
     });
 
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {});
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {});
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {});
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, {});
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {})
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, {})
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
     vim.keymap.set('n', 'gH', vim.lsp.buf.signature_help, {})
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, {})
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, {})
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, {})
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
+    -- vim.keymap.set("n", "T", toggle_inlay, {})
 end
+
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require("lspconfig");
+
+lspconfig.tsserver.setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+})
+
+lspconfig.biome.setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+})
 
 lspconfig.lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-lspconfig.html.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-require('lspconfig').cssls.setup {
+lspconfig.cssls.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
 
-require('lspconfig').eslint.setup {
+lspconfig.eslint.setup {
+  on_attach = on_attach,
+}
+
+lspconfig.clangd.setup ({
+    on_attach = on_attach,
+    capabilities = capabilities
+})
+
+lspconfig.pyright.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-require('lspconfig').clangd.setup {
+lspconfig.jdtls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
-require('lspconfig').pyright.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-require('lspconfig').jdtls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-require('lspconfig').lemminx.setup {
+lspconfig.lemminx.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
 
 lspconfig.tailwindcss.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
-
-lspconfig.emmet_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }
@@ -116,14 +112,3 @@ lspconfig.yamlls.setup {
     capabilites = capabilities
 }
 
-vim.g.rustaceanvim = {
-    tools = {
-        
-    },
-    server = {
-        on_attach = on_attach,
-        default_settings = {
-            ["rust-analyzer"] = {}
-        }
-    },
-}
