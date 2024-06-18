@@ -19,9 +19,6 @@ local toggle_inlay = function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ nil }))
 end
 
--- Global mappings
-vim.keymap.set("n", "gh", vim.diagnostic.open_float, {});
-
 local on_attach = function(client, bufnr)
     -- Attach breadcrumbs plugin to the on_attach fn
     if client.server_capabilities.documentSymbolProvider then
@@ -41,7 +38,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, {})
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, {})
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
-    -- vim.keymap.set("n", "T", toggle_inlay, {})
+    vim.keymap.set("n", "T", toggle_inlay, {})
 end
 
 
