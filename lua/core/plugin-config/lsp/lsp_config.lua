@@ -131,7 +131,7 @@ lspconfig.cssmodules_ls.setup {
         client.server_capabilities.definitionProvider = false
     end,
     init_options = {
-        camelCase = true
+        camelCase = false
     }
 }
 
