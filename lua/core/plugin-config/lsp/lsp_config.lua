@@ -1,17 +1,18 @@
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = {
-      'lua_ls',
-      'eslint',
-      'html',
-      'cssls',
-      'clangd',
-      'pyright',
-      'jdtls',
-      'tailwindcss',
-      'prismals',
-      'sqlls',
-  }
+    ensure_installed = {
+        'lua_ls',
+        'eslint',
+        'html',
+        'cssls',
+        'clangd',
+        'pyright',
+        'jdtls',
+        'tailwindcss',
+        'prismals',
+        'sqlls',
+        'cssmodules_ls'
+    }
 });
 local navic = require("nvim-navic");
 
@@ -40,7 +41,6 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
     vim.keymap.set("n", "T", toggle_inlay, {})
 end
-
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require("lspconfig");
@@ -124,5 +124,14 @@ lspconfig.prismals.setup {
 lspconfig.yamlls.setup {
     on_attach = on_attach,
     capabilites = capabilities
+}
+
+lspconfig.cssmodules_ls.setup {
+    on_attach = function (client)
+        client.server_capabilities.definitionProvider = false
+    end,
+    init_options = {
+        camelCase = true
+    }
 }
 
