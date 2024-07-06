@@ -1,10 +1,6 @@
 -- Change the theme to whatever theme u want, just have it installed first (duh)
 -- Enable devicons first
 require('core.plugin-config.ui.web-devicons')
--- Then setup everything else
-require('core.plugin-config.ui.themes.catppuccin')
-vim.cmd.colorscheme("catppuccin")
-
 require('core.plugin-config.lsp.lsp_config')
 require('core.plugin-config.ui.oil')
 require('core.plugin-config.ui.lualine')

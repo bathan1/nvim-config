@@ -16,7 +16,7 @@ require('mason-lspconfig').setup({
 local navic = require("nvim-navic");
 
 local toggle_inlay = function()
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ nil }))
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 end
 
 local on_attach = function(client, bufnr)
@@ -47,7 +47,19 @@ local lspconfig = require("lspconfig");
 
 lspconfig.tsserver.setup({
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
+    init_options = {
+        preferences = {
+            includeInlayParameterNameHints = 'all',
+            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+            importModuleSpecifierPreference = 'non-relative',
+        }
+    }
 })
 
 lspconfig.html.setup({
@@ -66,7 +78,12 @@ lspconfig.cssls.setup {
 }
 
 lspconfig.eslint.setup {
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "EslintFixAll"
+        })
+    end
 }
 
 lspconfig.clangd.setup ({
