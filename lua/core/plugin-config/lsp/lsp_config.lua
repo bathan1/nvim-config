@@ -135,3 +135,8 @@ lspconfig.cssmodules_ls.setup {
     }
 }
 
+lspconfig.solc.setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+})
+

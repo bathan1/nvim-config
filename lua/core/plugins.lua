@@ -109,9 +109,6 @@ local plugins = {
         -- or refer to the configuration section
         -- for configuration options
         }
-    end,
-    init = function()
-        vim.cmd("colorscheme poimandres")
     end
     }
 }

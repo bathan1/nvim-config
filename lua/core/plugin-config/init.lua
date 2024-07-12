@@ -9,3 +9,5 @@ require('core.plugin-config.utils.telescope')
 require('core.plugin-config.utils.treesitter')
 require('core.plugin-config.utils.completions')
 require('core.plugin-config.utils.indent-blankline')
+
+vim.cmd('colorscheme poimandres')
