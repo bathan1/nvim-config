@@ -10,4 +10,4 @@ require('core.plugin-config.utils.treesitter')
 require('core.plugin-config.utils.completions')
 require('core.plugin-config.utils.indent-blankline')
 
-vim.cmd("colorscheme tokyonight")
+vim.cmd("colorscheme tokyonight-night")
