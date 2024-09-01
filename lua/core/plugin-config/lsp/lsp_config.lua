@@ -135,3 +135,10 @@ lspconfig.cssmodules_ls.setup {
     }
 }
 
+lspconfig.ocamlls.setup {
+    cmd = { "ocamllsp" },
+    filetypes = { "ocaml", "reason" },
+    root_dir = lspconfig.util.root_pattern(".git", "dune-project", "dune-workspace", "esy.lock", "package.json"),
+    on_attach = on_attach
+}
+
