@@ -1,6 +1,6 @@
-require('core.autocmds')
-require('core.keymaps')
+require('autocmds')
+require('keymaps')
 if not vim.g.vscode then
-    require('core.plugins')
-    require('core.plugin-config')
+    require('plugins')
+    require('plugin-config')
 end
