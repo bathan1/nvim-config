@@ -10,7 +10,7 @@ require('nvim-treesitter.configs').setup({
     },
     indent = {
         enable = true,
-        enable_close_on_slash = true,
+        enable_close_on_slash = true
     },
 })
 

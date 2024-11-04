@@ -7,7 +7,7 @@ vim.cmd[[
 ]]
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "html", "css", "javascript", "typescript", "javascriptreact", "typescriptreact", "json", "ocaml" },
+    pattern = { "html", "css", "javascript", "typescript", "javascriptreact", "typescriptreact", "json" },
     callback = function()
         vim.opt_local.tabstop = 2
         vim.opt_local.shiftwidth = 2
@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "c", "cpp", "java" },
+    pattern = { "c", "cpp", "java", "ocaml" },
     callback = function()
         vim.opt_local.tabstop = 4
         vim.opt_local.shiftwidth = 4
