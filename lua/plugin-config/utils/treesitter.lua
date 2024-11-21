@@ -3,13 +3,13 @@ require('nvim-treesitter.configs').setup({
     sync_install = false,
     ignore_install = {},
     modules = {},
-    ensure_installed = { 'c', 'lua', 'vim', 'javascript', 'typescript', "html", 'css', 'tsx', 'json' },
+    ensure_installed = { 'c', 'lua', 'vim', 'javascript', 'typescript', "html", 'css', 'tsx', 'json', 'ocaml' },
     highlight = {
         enable = true,
         use_languagetree = true,
     },
     indent = {
-        enable = true,
+        enable = { "ocaml" },
         enable_close_on_slash = true
     },
 })

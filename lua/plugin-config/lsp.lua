@@ -130,3 +130,14 @@ lspconfig.ocamlls.setup {
     on_attach = on_attach
 }
 
+vim.keymap.set("n", "<space>f", function()
+    vim.lsp.buf.format({
+        async = true,
+		-- Predicate used to filter clients. Receives a client as
+		-- argument and must return a boolean. Clients matching the
+		-- predicate are included.
+        filter = function(client)
+            return client.name == "null-ls"
+        end,
+    })
+end)
