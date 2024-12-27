@@ -11,7 +11,7 @@ require('mason-lspconfig').setup({
         'tailwindcss',
         'prismals',
         'sqlls',
-        'cssmodules_ls'
+        'cssmodules_ls',
     }
 });
 local navic = require("nvim-navic");
@@ -45,9 +45,9 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require("lspconfig");
 
-lspconfig.tsserver.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
+lspconfig.ts_ls.setup({
+    on_attach,
+    capabilities,
 })
 
 lspconfig.html.setup({
