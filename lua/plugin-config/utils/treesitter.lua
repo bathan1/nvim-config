@@ -9,7 +9,7 @@ require('nvim-treesitter.configs').setup({
         use_languagetree = true,
     },
     indent = {
-        enable = { "ocaml" },
+        enable = true,
         enable_close_on_slash = true
     },
 })

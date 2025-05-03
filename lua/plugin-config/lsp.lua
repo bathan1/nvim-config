@@ -2,7 +2,6 @@ require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
         'lua_ls',
-        'eslint',
         'html',
         'cssls',
         'clangd',
@@ -65,14 +64,14 @@ lspconfig.cssls.setup {
   capabilities = capabilities
 }
 
-lspconfig.eslint.setup {
-  on_attach = function(client, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "EslintFixAll"
-        })
-    end
-}
+-- lspconfig.eslint.setup {
+--   on_attach = function(client, bufnr)
+--     vim.api.nvim_create_autocmd("BufWritePre", {
+--             buffer = bufnr,
+--             command = "EslintFixAll"
+--         })
+--     end
+-- }
 
 lspconfig.clangd.setup ({
     cmd = {'clangd', '--background-index', '--clang-tidy', '--log=verbose'},

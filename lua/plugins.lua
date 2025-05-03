@@ -155,6 +155,14 @@ local plugins = {
         lazy = false,
         priority = 1000,
         opts = {},
+    },
+    {
+        'marko-cerovac/material.nvim'
+    },
+    {
+        "davidmh/mdx.nvim",
+        config = true,
+        dependencies = {"nvim-treesitter/nvim-treesitter"}
     }
 }
 
