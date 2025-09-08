@@ -10,5 +10,4 @@ require('plugin-config.utils.treesitter')
 require('plugin-config.utils.completions')
 require('plugin-config.utils.indent-blankline')
 
-vim.g.material_style = "deep ocean"
-vim.cmd("colorscheme material")
+vim.cmd("colorscheme github_dark_default")
