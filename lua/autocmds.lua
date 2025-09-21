@@ -20,7 +20,7 @@ vim.cmd[[
 ]]
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "html", "css", "javascript", "typescript", "javascriptreact", "typescriptreact", "json" },
+    pattern = { "html", "css", "javascriptreact", "typescriptreact", "json" },
     callback = function()
         local prettier_config = vim.fn.findfile(".prettierrc", ".;")
         if prettier_config ~= "" then
@@ -33,6 +33,23 @@ vim.api.nvim_create_autocmd("FileType", {
         end
             vim.opt_local.tabstop = 2
             vim.opt_local.shiftwidth = 2
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {"javascript", "typescript"},
+    callback = function()
+        local prettier_config = vim.fn.findfile(".prettierrc", ".;")
+        if prettier_config ~= "" then
+            local json = vim.fn.system("jq .tabWidth " .. prettier_config)
+            local tab_width = tonumber(json) or 2
+            vim.opt.tabstop = tab_width
+            vim.opt.shiftwidth = tab_width
+            vim.opt.expandtab = true
+            return
+        end
+            vim.opt_local.tabstop = 4
+            vim.opt_local.shiftwidth = 4
     end
 })
 

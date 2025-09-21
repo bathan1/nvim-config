@@ -75,9 +75,6 @@ lspconfig.cssls.setup {
 
 lspconfig.clangd.setup ({
     cmd = {'clangd', '--background-index', '--clang-tidy', '--log=verbose'},
-    init_options = {
-        fallbackFlags = { '-std=c11' },
-    },
     on_attach = on_attach,
     capabilities = capabilities
 })
