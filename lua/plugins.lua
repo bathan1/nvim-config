@@ -142,6 +142,9 @@ local plugins = {
             -- This defaults to nil and will use the default ansi colors for the theme
             ansi_colors_name = nil,
         },
+    },
+    {
+        "akai54/2077.nvim"
     }
 }
 
