@@ -10,4 +10,4 @@ require('plugin-config.utils.treesitter')
 require('plugin-config.utils.completions')
 require('plugin-config.utils.indent-blankline')
 
-vim.cmd("colorscheme github_dark_default")
+vim.cmd("colorscheme wombat")
