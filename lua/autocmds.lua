@@ -27,7 +27,6 @@ local function resolve_prettier_tabwidth_for(bufpath)
     "npx --yes prettier --find-config-path " .. vim.fn.shellescape(bufpath)
   )
   if cfg_path == nil or cfg_path == "" then return nil end
-    print(cfg_path)
 
   local cmd = [[node -e "const p=require('prettier');p.resolveConfig(process.argv[1]).then(c=>{console.log(c && c.tabWidth || '');}).catch(()=>console.log(''))" ]]
     .. vim.fn.shellescape(bufpath)
