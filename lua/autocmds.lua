@@ -27,6 +27,7 @@ local function resolve_prettier_tabwidth_for(bufpath)
     "npx --yes prettier --find-config-path " .. vim.fn.shellescape(bufpath)
   )
   if cfg_path == nil or cfg_path == "" then return nil end
+    print(cfg_path)
 
   local cmd = [[node -e "const p=require('prettier');p.resolveConfig(process.argv[1]).then(c=>{console.log(c && c.tabWidth || '');}).catch(()=>console.log(''))" ]]
     .. vim.fn.shellescape(bufpath)
@@ -77,70 +78,6 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.css", "*.scss", "*.html", "*.md" },
   callback = apply_tabs_from_prettier,
 })
-
--- vim.api.nvim_create_autocmd("FileType", {
---     pattern = { "html", "css", "javascriptreact", "typescriptreact", "json" },
---     callback = function()
---         local package_json = vim.fn.findfile("package.json", ".;")
---         if package_json == "" then
---             vim.notify("no package.json found, defaulting to 2")
---             vim.opt_local.tabstop = 2
---             vim.opt_local.shiftwidth = 2
---             return
---         end
---
---         -- Get the directory containing the nearest package.json
---         local pkg_dir = vim.fn.fnamemodify(package_json, ":h")
---
---         -- Look only in that directory for a .prettierrc
---         local prettier_config = vim.fn.findfile(".prettierrc", pkg_dir)
---
---         if prettier_config ~= "" then
---             vim.notify("found prettier in " .. prettier_config)
---             local json = vim.fn.system("jq .tabWidth " .. prettier_config)
---             local tab_width = tonumber(json) or 2
---             vim.opt.tabstop = tab_width
---             vim.opt.shiftwidth = tab_width
---             vim.opt.expandtab = true
---         else
---             vim.notify("no .prettierrc in package.json dir, defaulting to 4")
---             vim.opt_local.tabstop = 4
---             vim.opt_local.shiftwidth = 4
---         end
---     end
--- })
---
--- vim.api.nvim_create_autocmd("FileType", {
---     pattern = {"javascript", "typescript"},
---     callback = function()
---         local package_json = vim.fn.findfile("package.json", ".;")
---         if package_json == "" then
---             vim.notify("no package.json found, defaulting to 4")
---             vim.opt_local.tabstop = 4
---             vim.opt_local.shiftwidth = 4
---             return
---         end
---
---         -- Get the directory containing the nearest package.json
---         local pkg_dir = vim.fn.fnamemodify(package_json, ":h")
---
---         -- Look only in that directory for a .prettierrc
---         local prettier_config = vim.fn.findfile(".prettierrc", pkg_dir)
---
---         if prettier_config ~= "" then
---             vim.notify("found prettier in " .. prettier_config)
---             local json = vim.fn.system("jq .tabWidth " .. prettier_config)
---             local tab_width = tonumber(json) or 2
---             vim.opt.tabstop = tab_width
---             vim.opt.shiftwidth = tab_width
---             vim.opt.expandtab = true
---         else
---             vim.notify("no .prettierrc in package.json dir, defaulting to 4")
---             vim.opt_local.tabstop = 4
---             vim.opt_local.shiftwidth = 4
---         end
---     end
--- })
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "c", "cpp", "java", "ocaml" },
