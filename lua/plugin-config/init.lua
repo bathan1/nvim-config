@@ -10,4 +10,7 @@ require('plugin-config.utils.treesitter')
 require('plugin-config.utils.completions')
 require('plugin-config.utils.indent-blankline')
 
-vim.cmd("colorscheme github_dark_default")
+require("vercel").setup({
+    theme = "dark"
+})
+vim.cmd("colorscheme vercel")

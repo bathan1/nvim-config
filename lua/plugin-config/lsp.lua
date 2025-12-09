@@ -9,7 +9,6 @@ require('mason-lspconfig').setup({
         'jdtls',
         'tailwindcss',
         'prismals',
-        'sqlls',
         'cssmodules_ls',
     }
 });
