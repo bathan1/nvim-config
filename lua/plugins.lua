@@ -143,13 +143,6 @@ local plugins = {
             ansi_colors_name = nil,
         },
     },
-    {
-        "OXY2DEV/markview.nvim",
-        lazy = false,
-
-        -- Completion for `blink.cmp`
-        -- dependencies = { "saghen/blink.cmp" },
-    },
     { 'tiesen243/vercel.nvim' },
     {
         "sphamba/smear-cursor.nvim",
