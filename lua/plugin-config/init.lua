@@ -14,3 +14,11 @@ require("vercel").setup({
     theme = "dark"
 })
 vim.cmd("colorscheme vercel")
+
+vim.cmd [[
+  highlight Normal guibg=NONE ctermbg=NONE
+  highlight NormalNC guibg=NONE ctermbg=NONE
+  highlight FloatBorder guibg=NONE
+  highlight NormalFloat guibg=NONE
+]]
+

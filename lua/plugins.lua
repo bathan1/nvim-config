@@ -32,7 +32,6 @@ local plugins = {
         opts = {},
         dependencies = "nvim-tree/nvim-web-devicons"
     },
-    { 'folke/neodev.nvim', opts = {} },
     'nvim-lualine/lualine.nvim',
     'lewis6991/gitsigns.nvim',
     {
@@ -49,9 +48,6 @@ local plugins = {
     {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
-    },
-    {
-        'neovim/nvim-lspconfig',
     },
     {
         'numToStr/Comment.nvim',
@@ -92,6 +88,9 @@ local plugins = {
     },
     {
         "dgox16/oldworld.nvim"
+    },
+    {
+        "neovim/nvim-lspconfig"
     },
     {
         "ramojus/mellifluous.nvim"
@@ -147,7 +146,58 @@ local plugins = {
     {
         "sphamba/smear-cursor.nvim",
         opts = {},
-    }
+    },
+    { 'tiesen243/vercel.nvim' },
+    { "rust-lang/rust.vim" },
+    {
+    "kylechui/nvim-surround",
+        version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
+    },
+    {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  { -- optional cmp completion source for require statements and module annotations
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+      })
+    end,
+  },
+  { -- optional blink completion source for require statements and module annotations
+    "saghen/blink.cmp",
+    build = "cargo build --release",
+    opts = {
+      sources = {
+        -- add lazydev to your completion providers
+        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        providers = {
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            -- make lazydev completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
+          },
+        },
+      },
+    },
+  }
 }
 
 local opts = {}

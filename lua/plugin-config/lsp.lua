@@ -9,7 +9,7 @@ require('mason-lspconfig').setup({
         'jdtls',
         'tailwindcss',
         'prismals',
-        'cssmodules_ls',
+        'cssmodules_ls'
     }
 });
 local navic = require("nvim-navic");
@@ -41,93 +41,107 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lspconfig = require("lspconfig");
 
-lspconfig.ts_ls.setup({
-    on_attach,
-    capabilities,
-})
-
-lspconfig.html.setup({
-    on_attach = on_attach,
-    capabilities = capabilities
-})
-
-lspconfig.lua_ls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-lspconfig.cssls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
-
--- lspconfig.eslint.setup {
---   on_attach = function(client, bufnr)
---     vim.api.nvim_create_autocmd("BufWritePre", {
---             buffer = bufnr,
---             command = "EslintFixAll"
---         })
---     end
--- }
-
-lspconfig.clangd.setup ({
-    cmd = {'clangd', '--background-index', '--clang-tidy', '--log=verbose'},
-    on_attach = on_attach,
-    capabilities = capabilities
-})
-
-lspconfig.pyright.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-lspconfig.jdtls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
-lspconfig.lemminx.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
-
-lspconfig.tailwindcss.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
-
-lspconfig.sqlls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
-
-lspconfig.prismals.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
-
-lspconfig.yamlls.setup {
-    on_attach = on_attach,
-    capabilites = capabilities
-}
-
-lspconfig.cssmodules_ls.setup {
-    on_attach = function (client)
-        client.server_capabilities.definitionProvider = false
-    end,
-    init_options = {
-        camelCase = false
+vim.lsp.config('*', {
+  capabilities = {
+    textDocument = {
+      semanticTokens = {
+        multilineTokenSupport = true,
+      }
     }
-}
+  },
+  root_markers = { '.git' }
+})
 
-lspconfig.ocamlls.setup {
-    cmd = { "ocamllsp" },
-    filetypes = { "ocaml", "reason" },
-    root_dir = lspconfig.util.root_pattern(".git", "dune-project", "dune-workspace", "esy.lock", "package.json"),
+vim.lsp.enable('ts_ls')
+vim.lsp.config('ts_ls', {
+    on_attach = on_attach,
+})
+
+vim.lsp.enable('html')
+vim.lsp.config('html', {
+    on_attach = on_attach,
+})
+
+vim.lsp.enable('ocamllsp', {
     on_attach = on_attach
-}
+})
+
+-- lspconfig.lua_ls.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- }
+--
+-- lspconfig.cssls.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities
+-- }
+--
+-- -- lspconfig.eslint.setup {
+-- --   on_attach = function(client, bufnr)
+-- --     vim.api.nvim_create_autocmd("BufWritePre", {
+-- --             buffer = bufnr,
+-- --             command = "EslintFixAll"
+-- --         })
+-- --     end
+-- -- }
+--
+-- lspconfig.clangd.setup ({
+--     cmd = {'clangd', '--background-index', '--clang-tidy', '--log=verbose'},
+--     on_attach = on_attach,
+--     capabilities = capabilities
+-- })
+--
+-- lspconfig.pyright.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- }
+--
+-- lspconfig.jdtls.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- }
+--
+-- lspconfig.lemminx.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities
+-- }
+--
+-- lspconfig.tailwindcss.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities
+-- }
+--
+-- lspconfig.sqlls.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities
+-- }
+--
+-- lspconfig.prismals.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities
+-- }
+--
+-- lspconfig.yamlls.setup {
+--     on_attach = on_attach,
+--     capabilites = capabilities
+-- }
+--
+-- lspconfig.cssmodules_ls.setup {
+--     on_attach = function (client)
+--         client.server_capabilities.definitionProvider = false
+--     end,
+--     init_options = {
+--         camelCase = false
+--     }
+-- }
+--
+-- lspconfig.ocamlls.setup {
+--     cmd = { "ocamllsp" },
+--     filetypes = { "ocaml", "reason" },
+--     root_dir = lspconfig.util.root_pattern(".git", "dune-project", "dune-workspace", "esy.lock", "package.json"),
+--     on_attach = on_attach
+-- }
 
 vim.keymap.set("n", "<space>f", function()
     vim.lsp.buf.format({
