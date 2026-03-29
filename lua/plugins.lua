@@ -98,16 +98,16 @@ local plugins = {
     { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
 
     {
-    'olivercederborg/poimandres.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-        require('poimandres').setup {
-        -- leave this setup function empty for default config
-        -- or refer to the configuration section
-        -- for configuration options
-        }
-    end
+        'olivercederborg/poimandres.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require('poimandres').setup {
+                -- leave this setup function empty for default config
+                -- or refer to the configuration section
+                -- for configuration options
+            }
+        end
     },
 
     {
@@ -150,7 +150,7 @@ local plugins = {
     { 'tiesen243/vercel.nvim' },
     { "rust-lang/rust.vim" },
     {
-    "kylechui/nvim-surround",
+        "kylechui/nvim-surround",
         version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
         event = "VeryLazy",
         config = function()
@@ -160,44 +160,61 @@ local plugins = {
         end
     },
     {
-    "folke/lazydev.nvim",
-    ft = "lua", -- only load on lua files
-    opts = {
-      library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-      },
-    },
-  },
-  { -- optional cmp completion source for require statements and module annotations
-    "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, {
-        name = "lazydev",
-        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-      })
-    end,
-  },
-  { -- optional blink completion source for require statements and module annotations
-    "saghen/blink.cmp",
-    build = "cargo build --release",
-    opts = {
-      sources = {
-        -- add lazydev to your completion providers
-        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-        providers = {
-          lazydev = {
-            name = "LazyDev",
-            module = "lazydev.integrations.blink",
-            -- make lazydev completions top priority (see `:h blink.cmp`)
-            score_offset = 100,
-          },
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                -- See the configuration section for more details
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            },
         },
-      },
     },
-  }
+    { -- optional cmp completion source for require statements and module annotations
+        "hrsh7th/nvim-cmp",
+        opts = function(_, opts)
+            opts.sources = opts.sources or {}
+            table.insert(opts.sources, {
+                name = "lazydev",
+                group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+            })
+        end,
+    },
+    { -- optional blink completion source for require statements and module annotations
+        "saghen/blink.cmp",
+        build = "cargo build --release",
+        opts = {
+            sources = {
+                -- add lazydev to your completion providers
+                default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+                providers = {
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
+                    },
+                },
+            },
+        },
+    },
+    {
+        'kristijanhusak/vim-dadbod-ui',
+        dependencies = {
+            { 'tpope/vim-dadbod', lazy = true },
+            { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true }, -- Optional
+        },
+        cmd = {
+            'DBUI',
+            'DBUIToggle',
+            'DBUIAddConnection',
+            'DBUIFindBuffer',
+        },
+        init = function()
+            -- Your DBUI configuration
+            vim.g.db_ui_use_nerd_fonts = 1
+        end,
+    }
 }
 
 local opts = {}
