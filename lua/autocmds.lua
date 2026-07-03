@@ -60,9 +60,9 @@ local function apply_tabs_from_prettier(args)
                 vim.opt_local.shiftwidth = 2
                 tabwidths[ext] = 2
             elseif ext == ".js" or ext == ".ts" then
-                vim.opt_local.tabstop = 4
-                vim.opt_local.shiftwidth = 4
-                tabwidths[ext] = 4
+                vim.opt_local.tabstop = 2
+                vim.opt_local.shiftwidth = 2
+                tabwidths[ext] = 2
             else
                 vim.opt_local.tabstop = 2
                 vim.opt_local.shiftwidth = 2
@@ -81,8 +81,8 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "c", "cpp", "java", "ocaml" },
     callback = function()
-        vim.opt_local.tabstop = 4
-        vim.opt_local.shiftwidth = 4
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
     end
 })
 

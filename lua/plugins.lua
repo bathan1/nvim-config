@@ -39,7 +39,12 @@ local plugins = {
     },
 
     -- Syntax highlighting and Language Support
-    'nvim-treesitter/nvim-treesitter',
+    {
+        'nvim-treesitter/nvim-treesitter',
+        branch = 'main',
+        lazy = false,
+        build = ':TSUpdate',
+    },
     {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.4',
@@ -130,7 +135,6 @@ local plugins = {
     },
     {
         "davidmh/mdx.nvim",
-        config = true,
         dependencies = {"nvim-treesitter/nvim-treesitter"}
     },
     {
@@ -182,7 +186,10 @@ local plugins = {
     },
     { -- optional blink completion source for require statements and module annotations
         "saghen/blink.cmp",
-        build = "cargo build --release",
+        dependencies = { "saghen/blink.lib" },
+        build = function()
+            require("blink.cmp").build():pwait()
+        end,
         opts = {
             sources = {
                 -- add lazydev to your completion providers
@@ -214,7 +221,9 @@ local plugins = {
             -- Your DBUI configuration
             vim.g.db_ui_use_nerd_fonts = 1
         end,
-    }
+    },
+    { "bathan1/mql" }
+
 }
 
 local opts = {}

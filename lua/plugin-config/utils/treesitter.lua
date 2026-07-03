@@ -1,17 +1,44 @@
-require('nvim-treesitter.configs').setup({
-    auto_install = true,
-    sync_install = false,
-    ignore_install = {},
-    modules = {},
-    ensure_installed = { 'c', 'lua', 'vim', 'javascript', 'typescript', "html", 'css', 'tsx', 'json', 'ocaml' },
-    highlight = {
-        enable = true,
-        use_languagetree = true,
+local treesitter = require("nvim-treesitter")
+
+local parsers = {
+    "c",
+    "css",
+    "html",
+    "javascript",
+    "json",
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "ocaml",
+    "rust",
+    "tsx",
+    "typescript",
+    "vim",
+}
+
+treesitter.setup({})
+treesitter.install(parsers)
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "c",
+        "css",
+        "html",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "lua",
+        "markdown",
+        "ocaml",
+        "rust",
+        "typescript",
+        "typescriptreact",
+        "vim",
     },
-    indent = {
-        enable = true,
-        enable_close_on_slash = true
-    },
+    callback = function()
+        vim.treesitter.start()
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
 })
 
 require("nvim-ts-autotag").setup({
