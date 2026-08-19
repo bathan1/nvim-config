@@ -80,6 +80,7 @@ local plugins = {
         lazy = true,
         event = 'VeryLazy',
     },
+    'stevearc/conform.nvim',
     'Vimjas/vim-python-pep8-indent',
     {
         "b0o/lavi.nvim",
@@ -243,7 +244,7 @@ local plugins = {
             vim.g.db_ui_use_nerd_fonts = 1
         end,
     },
-    { "bathan1/sqld" }
+    { "bathan1/squid" }
 
 }
 

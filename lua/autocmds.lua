@@ -20,62 +20,24 @@ vim.cmd[[
 ]]
 
 
-local function resolve_prettier_tabwidth_for(bufpath)
-  if bufpath == nil or bufpath == "" then return nil end
-
-  local cfg_path = vim.fn.system(
-    "npx --yes prettier --find-config-path " .. vim.fn.shellescape(bufpath)
-  )
-  if cfg_path == nil or cfg_path == "" then return nil end
-
-  local cmd = [[node -e "const p=require('prettier');p.resolveConfig(process.argv[1]).then(c=>{console.log(c && c.tabWidth || '');}).catch(()=>console.log(''))" ]]
-    .. vim.fn.shellescape(bufpath)
-
-  local out = vim.fn.system(cmd)
-  local tw = tonumber((out or ""):gsub("%s+$", ""), 10)
-
-  return tw
-end
-
-local tabwidths = {}
-local function apply_tabs_from_prettier(args)
-    local file = args.file or vim.api.nvim_buf_get_name(args.buf)
-    local ext = file:match("^.+%.([^./\\]+)$")
-    local cached_tw = tabwidths[ext]
-    if cached_tw ~= nil then
-        vim.opt_local.tabstop = cached_tw
-        vim.opt_local.shiftwidth = cached_tw
-        vim.opt_local.expandtab = true
-    else
-        local tw = resolve_prettier_tabwidth_for(file)
-        if tw then
-            vim.opt_local.tabstop = tw
-            vim.opt_local.shiftwidth = tw
-            vim.opt_local.expandtab = true
-            tabwidths[ext] = tw
-        else
-            -- fallback if no prettier config
-            if ext == ".jsx" or ext == ".tsx" then
-                vim.opt_local.tabstop = 2
-                vim.opt_local.shiftwidth = 2
-                tabwidths[ext] = 2
-            elseif ext == ".js" or ext == ".ts" then
-                vim.opt_local.tabstop = 2
-                vim.opt_local.shiftwidth = 2
-                tabwidths[ext] = 2
-            else
-                vim.opt_local.tabstop = 2
-                vim.opt_local.shiftwidth = 2
-                tabwidths[ext] = 2
-            end
-            vim.opt_local.expandtab = true
-        end
+local function set_buffer_tabwidth(buf, tabwidth)
+    if not vim.api.nvim_buf_is_valid(buf) then
+        return
     end
+
+    vim.bo[buf].tabstop = tabwidth
+    vim.bo[buf].shiftwidth = tabwidth
+    vim.bo[buf].expandtab = true
 end
 
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.css", "*.scss", "*.html", "*.md" },
-  callback = apply_tabs_from_prettier,
+  desc = "Set the default tab width for web files",
+  callback = function(args)
+      -- Project-specific indentation can be declared in .editorconfig. Do not
+      -- run package managers or formatters synchronously while opening a file.
+      set_buffer_tabwidth(args.buf, 2)
+  end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {

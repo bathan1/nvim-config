@@ -2,6 +2,7 @@
 -- Enable devicons first
 require('plugin-config.ui.web-devicons')
 require('plugin-config.lsp')
+require('plugin-config.formatting')
 require('plugin-config.ui.oil')
 require('plugin-config.ui.lualine')
 require('plugin-config.ui.gitsigns')
@@ -21,4 +22,3 @@ vim.cmd [[
   highlight FloatBorder guibg=NONE
   highlight NormalFloat guibg=NONE
 ]]
-

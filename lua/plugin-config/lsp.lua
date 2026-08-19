@@ -12,10 +12,15 @@ require("mason-lspconfig").setup({
     "prismals",
     "cssmodules_ls",
     "ts_ls",
+    "vue_ls",
   },
 })
 
 local navic = require("nvim-navic")
+local mason_path = vim.fn.stdpath("data") .. "/mason"
+local vue_language_server_path = mason_path .. "/packages/vue-language-server"
+local vue_typescript_plugin = vue_language_server_path .. "/node_modules/@vue/typescript-plugin"
+local vue_tsdk = mason_path .. "/packages/typescript-language-server/node_modules/typescript/lib"
 
 local toggle_inlay = function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
@@ -36,7 +41,7 @@ capabilities = vim.tbl_deep_extend("force", capabilities, {
 })
 
 local on_attach = function(client, bufnr)
-  if client.server_capabilities.documentSymbolProvider then
+  if client.server_capabilities.documentSymbolProvider and not navic.is_available(bufnr) then
     navic.attach(client, bufnr)
   end
 
@@ -61,8 +66,22 @@ vim.lsp.config("*", {
 
 vim.lsp.config("ts_ls", {
   on_attach = on_attach,
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+  },
 
   init_options = {
+    plugins = {
+      {
+        name = "@vue/typescript-plugin",
+        location = vue_typescript_plugin,
+        languages = { "vue" },
+      },
+    },
     preferences = {
       importModuleSpecifier = "non-relative",
       importModuleSpecifierPreference = "non-relative",
@@ -71,6 +90,11 @@ vim.lsp.config("ts_ls", {
 })
 
 vim.lsp.config("html", {
+  on_attach = on_attach,
+})
+
+vim.lsp.config("vue_ls", {
+  cmd = { "vue-language-server", "--stdio", "--tsdk=" .. vue_tsdk },
   on_attach = on_attach,
 })
 
@@ -129,6 +153,7 @@ vim.lsp.config("ocamllsp", {
 
 vim.lsp.enable({
   "ts_ls",
+  "vue_ls",
   "html",
   "lua_ls",
   "cssls",
