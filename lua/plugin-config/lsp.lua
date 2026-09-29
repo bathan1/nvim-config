@@ -119,8 +119,25 @@ vim.lsp.config("jdtls", {
   on_attach = on_attach,
 })
 
+local tailwind_root_dir = vim.lsp.config.tailwindcss.root_dir
+
 vim.lsp.config("tailwindcss", {
   on_attach = on_attach,
+  root_dir = function(bufnr, on_dir)
+    tailwind_root_dir(bufnr, function(root)
+      -- A home-level .git can make Tailwind scan every project and toolchain.
+      -- Keep upstream project detection, but require a workspace below home.
+      if not root then
+        return
+      end
+      local home = vim.fs.normalize(vim.uv.os_homedir())
+      root = vim.fs.normalize(root)
+      if root == home or vim.startswith(home, root:gsub("/$", "") .. "/") then
+        return
+      end
+      on_dir(root)
+    end)
+  end,
 })
 
 vim.lsp.config("prismals", {
