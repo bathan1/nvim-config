@@ -1,8 +1,8 @@
 vim.g.clipboard = {
     name = "WslClipboard",
     copy = {
-        ["+"] = "clip.exe",
-        ["*"] = "clip.exe",
+        ["+"] = "wl-copy",
+        ["*"] = "wl-copy",
     },
     paste = {
         ["+"] = "powershell.exe -NoProfile -Command Get-Clipboard",
@@ -48,4 +48,42 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      if vim.wo[win].diff then
+        vim.wo[win].wrap = true
+        vim.wo[win].linebreak = true
+        vim.wo[win].number = true
+        vim.wo[win].relativenumber = false
+      end
+    end
+  end,
+})
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "DiffAdd", {
+      bg = "#1E4028",
+    })
+
+    vim.api.nvim_set_hl(0, "DiffDelete", {
+      bg = "#5C2424",
+    })
+
+    vim.api.nvim_set_hl(0, "DiffChange", {
+      bg = "#3A3A20",
+    })
+
+    vim.api.nvim_set_hl(0, "DiffText", {
+      bg = "#686020",
+    })
+  end,
+})
+
+-- so FROM and WHERE have highlighting
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "sqlKeyword", { link = "Statement" })
+  end,
+})
