@@ -26,7 +26,6 @@ local plugins = {
     'tiagovla/tokyodark.nvim',
     'rebelot/kanagawa.nvim',
     'nvim-tree/nvim-web-devicons',
-    "onsails/lspkind.nvim",
     {
         'stevearc/oil.nvim',
         opts = {},
@@ -63,11 +62,6 @@ local plugins = {
     "SmiteshP/nvim-navic",
 
     -- Text stuff
-    'hrsh7th/nvim-cmp',
-    'hrsh7th/cmp-nvim-lsp',
-    'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
-    'rafamadriz/friendly-snippets',
     'numToStr/Comment.nvim',
     {
         'windwp/nvim-autopairs',
@@ -175,16 +169,6 @@ local plugins = {
             },
         },
     },
-    { -- optional cmp completion source for require statements and module annotations
-        "hrsh7th/nvim-cmp",
-        opts = function(_, opts)
-            opts.sources = opts.sources or {}
-            table.insert(opts.sources, {
-                name = "lazydev",
-                group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-            })
-        end,
-    },
     {
       'saghen/blink.cmp',
       dependencies = {
@@ -199,26 +183,25 @@ local plugins = {
       ---@module 'blink.cmp'
       ---@type blink.cmp.Config
       opts = {
-        -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-        -- 'super-tab' for mappings similar to vscode (tab to accept)
-        -- 'enter' for enter to accept
-        -- 'none' for no mappings
-        --
-        -- All presets have the following mappings:
-        -- C-space: Open menu or open docs if already open
-        -- C-n/C-p or Up/Down: Select next/previous item
-        -- C-e: Hide menu
-        -- C-k: Toggle signature help (if signature.enabled = true)
-        --
-        -- See :h blink-cmp-config-keymap for defining your own keymap
-        keymap = { preset = 'default' },
+        keymap = {
+          preset = 'default',
+          ['<CR>'] = { 'select_and_accept', 'fallback' },
+          ['<C-o>'] = { 'show', 'fallback' },
+        },
     
         -- (Default) Only show the documentation popup when manually triggered
         completion = { documentation = { auto_show = false } },
     
-        -- (Default) list of enabled providers defined so that you can extend it
-        -- elsewhere in your config, without redefining it, due to `opts_extend`
-        sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
+        sources = {
+          default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+          providers = {
+            lazydev = {
+              name = 'LazyDev',
+              module = 'lazydev.integrations.blink',
+              score_offset = 100,
+            },
+          },
+        },
     
         -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
         -- You may use a lua implementation instead by using `implementation = "lua"`

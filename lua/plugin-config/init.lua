@@ -8,7 +8,6 @@ require('plugin-config.ui.lualine')
 require('plugin-config.ui.gitsigns')
 require('plugin-config.utils.telescope')
 require('plugin-config.utils.treesitter')
-require('plugin-config.utils.completions')
 require('plugin-config.utils.indent-blankline')
 
 require("vercel").setup({
