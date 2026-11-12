@@ -168,7 +168,12 @@ vim.lsp.config("ocamllsp", {
   on_attach = on_attach,
 })
 
+vim.lsp.config("rust_analyzer", {
+  on_attach = on_attach,
+})
+
 vim.lsp.enable({
+  "rust_analyzer",
   "ts_ls",
   "vue_ls",
   "html",
