@@ -227,7 +227,55 @@ local plugins = {
             vim.g.db_ui_use_nerd_fonts = 1
         end,
     },
-    { "bathan1/squid" }
+    { "bathan1/squid" },
+    {
+      "pwntester/octo.nvim",
+      cmd = "Octo",
+      opts = {
+        -- or "fzf-lua" or "snacks" or "default"
+        picker = "telescope",
+        -- Use real files for the review's right side when the PR branch is checked out.
+        use_local_fs = true,
+        -- bare Octo command opens picker of commands
+        enable_builtin = true,
+      },
+      keys = {
+        {
+          "<leader>oi",
+          "<CMD>Octo issue list<CR>",
+          desc = "List GitHub Issues",
+        },
+        {
+          "<leader>op",
+          "<CMD>Octo pr list<CR>",
+          desc = "List GitHub PullRequests",
+        },
+        {
+          "<leader>od",
+          "<CMD>Octo discussion list<CR>",
+          desc = "List GitHub Discussions",
+        },
+        {
+          "<leader>on",
+          "<CMD>Octo notification list<CR>",
+          desc = "List GitHub Notifications",
+        },
+        {
+          "<leader>os",
+          function()
+            require("octo.utils").create_base_search_command { include_current_repo = true }
+          end,
+          desc = "Search GitHub",
+        },
+      },
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
+        -- OR "ibhagwan/fzf-lua",
+        -- OR "folke/snacks.nvim",
+        "nvim-tree/nvim-web-devicons", -- optional if file_panel.icons is a function
+      },
+    }
 
 }
 
