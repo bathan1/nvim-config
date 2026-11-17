@@ -48,8 +48,13 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
+-- Keep repeated :diffthis calls from resetting wrapping in Octo reviews.
+vim.opt.diffopt:append("followwrap")
+
+vim.api.nvim_create_autocmd({ "VimEnter", "DiffUpdated", "BufWinEnter" }, {
+  group = vim.api.nvim_create_augroup("DiffWindowOptions", { clear = true }),
+  desc = "Wrap lines in diff windows, including Octo reviews",
+  callback = vim.schedule_wrap(function()
     for _, win in ipairs(vim.api.nvim_list_wins()) do
       if vim.wo[win].diff then
         vim.wo[win].wrap = true
@@ -58,7 +63,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
         vim.wo[win].relativenumber = false
       end
     end
-  end,
+  end),
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
