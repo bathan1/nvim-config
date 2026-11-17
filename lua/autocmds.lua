@@ -31,7 +31,7 @@ local function set_buffer_tabwidth(buf, tabwidth)
 end
 
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.css", "*.scss", "*.html", "*.md" },
+  pattern = { "*.js", "*.ts", "*.jsx", "*.tsx", "*.json", "*.css", "*.scss", "*.html" },
   desc = "Set the default tab width for web files",
   callback = function(args)
       -- Project-specific indentation can be declared in .editorconfig. Do not
@@ -41,10 +41,10 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "c", "cpp", "java", "ocaml" },
+    pattern = { "c", "cpp", "java", "ocaml", "sql", "markdown" },
     callback = function()
-        vim.opt_local.tabstop = 2
-        vim.opt_local.shiftwidth = 2
+        vim.opt_local.tabstop = 4
+        vim.opt_local.shiftwidth = 4
     end
 })
 
