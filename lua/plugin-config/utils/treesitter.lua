@@ -32,6 +32,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "markdown",
         "ocaml",
         "rust",
+        "sql",
         "typescript",
         "typescriptreact",
         "vim",
