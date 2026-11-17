@@ -11,6 +11,7 @@ local parsers = {
     "markdown_inline",
     "ocaml",
     "rust",
+    "sql",
     "tsx",
     "typescript",
     "vim",

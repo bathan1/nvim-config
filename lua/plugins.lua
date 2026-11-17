@@ -227,7 +227,6 @@ local plugins = {
       vim.g.db_ui_use_nerd_fonts = 1
     end,
   },
-  { "bathan1/squid" },
   {
     "pwntester/octo.nvim",
     cmd = "Octo",
@@ -275,8 +274,8 @@ local plugins = {
       -- OR "folke/snacks.nvim",
       "nvim-tree/nvim-web-devicons", -- optional if file_panel.icons is a function
     },
-  }
-
+  },
+  { "bathan1/squid" }
 }
 
 local opts = {}
